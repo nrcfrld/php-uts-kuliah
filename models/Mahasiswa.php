@@ -28,11 +28,17 @@ class Mahasiswa
   {
     $result = mysqli_query($this->connection, "INSERT INTO `mahasiswa` (`id`, `nim`, `nama`, `alamat`, `telpon`, `email`, `username`, `password`, `jurusan`, `jenjang_studi`) VALUES (NULL, '$data[nim]', '$data[nama]', '$data[alamat]', '$data[telpon]', '$data[email]', '$data[username]', '$data[password]', '$data[jurusan]', '$data[jenjang_studi]')");
 
-    if (mysqli_errno($this->connection)) {
-      return false;
+    if (!$result) {
+      return [
+        'status' => 'failed',
+        'message' => mysqli_error($this->connection)
+      ];
     }
 
-    return true;
+    return [
+      'status' => 'success',
+      'message' => 'Berhasil menambah data'
+    ];
   }
 
   public function getMahasiswaById($id)
@@ -56,5 +62,31 @@ class Mahasiswa
     }
 
     return true;
+  }
+
+  public function deleteMahasiswa($id)
+  {
+    $result = mysqli_query($this->connection, "DELETE FROM mahasiswa WHERE id='$id'");
+    if (mysqli_errno($this->connection)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  public function login($data)
+  {
+    $hasil = "";
+    $result = mysqli_query($this->connection, "SELECT * FROM mahasiswa WHERE username='$data[username]' AND password='$data[password]'");
+
+    while ($row = mysqli_fetch_array($result)) {
+      $hasil = $row;
+    }
+
+    if ($hasil) {
+      return $hasil;
+    }
+
+    return false;
   }
 }

@@ -19,6 +19,7 @@
 <script src="../assets/vendors/jquery-validation/jquery-validate.min.js"></script>
 <script src="../assets/vendors/password-strength-meter/password.min.js"></script>
 <script src="../assets/vendors/simple-datatables/simple-datatables.js"></script>
+<script src="../assets/vendors/toastify/toastify.js"></script>
 
 <script src="../assets/js/main.js"></script>
 </body>

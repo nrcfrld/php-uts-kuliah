@@ -127,7 +127,7 @@ $mahasiswa = new Mahasiswa();
                 <tr>
                   <td>
                     <a href="edit.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="#" class="btn btn-danger btn-sm">Hapus</a>
+                    <a href="process.php?action=delete&id=<?= $row['id'] ?>" class="btn btn-danger btn-sm">Hapus</a>
                   </td>
                   <td><?= $row['nim'] ?></td>
                   <td><?= $row['nama'] ?></td>
@@ -153,4 +153,29 @@ $mahasiswa = new Mahasiswa();
 
 <?php
 include "../layouts/footer.php";
+
+if (isset($_SESSION['info'])) {
+?>
+  <script>
+    let color = ""
+
+    if (`<?= $_SESSION['info']['status'] ?>` == 'success') {
+      color = "#4fbe87";
+    } else {
+      color = "#dc3545";
+    }
+
+    Toastify({
+      text: `<?= $_SESSION['info']['message'] ?>`,
+      duration: 3000,
+      backgroundColor: color,
+      gravity: "top",
+      position: "center",
+    }).showToast();
+  </script>
+<?php
+
+  unset($_SESSION['info']);
+  $_SESSION['info'] = null;
+}
 ?>

@@ -110,3 +110,24 @@ $("#password").password();
 // Datatable
 let table = document.querySelector(".datatable");
 let dataTable = new simpleDatatables.DataTable(table);
+
+// Jam
+setInterval(function () {
+  let currentDate = new Date();
+  let hours =
+    currentDate.getHours() < 10
+      ? `0${currentDate.getHours()}`
+      : currentDate.getHours();
+  let minutes =
+    currentDate.getMinutes() < 10
+      ? `0${currentDate.getMinutes()}`
+      : currentDate.getMinutes();
+  let seconds =
+    currentDate.getSeconds() < 10
+      ? `0${currentDate.getSeconds()}`
+      : currentDate.getSeconds();
+
+  let currentTime = `${hours}:${minutes}:${seconds} WIB`;
+
+  $("#current-time").html(currentTime);
+}, 1000);
